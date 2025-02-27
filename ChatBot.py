@@ -1,15 +1,17 @@
-import retrieve
+from Retrieval import retrieve
 import ollama
 
 LANGUAGE_MODEL = 'llama3.2:latest'
 
 input_query = input('\nAsk me a question: ')
-
 while input_query != "/bye":
     retrieved_knowledge = retrieve(input_query)
 
     # print('Retrieved knowledge:')
-    # for chunk, similarity in retrieved_knowledge:
+    bad_query_count = 0
+    for chunk, similarity in retrieved_knowledge:
+        if similarity < 0.2:
+            bad_query_count = bad_query_count + 1
         # print(f' - (similarity: {similarity:.2f}) {chunk}')
 
     instruction_prompt = f'''You are a helpful chatbot.
@@ -31,5 +33,6 @@ while input_query != "/bye":
     print('Chatbot response:')
     for chunk in stream:
         print(chunk['message']['content'], end='', flush=True)
+    input_query = input('\nAsk me a question: ')
 
 print("Goodbye. Have a great day :D")

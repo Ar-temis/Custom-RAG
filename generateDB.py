@@ -32,7 +32,6 @@ def extractPairs(doc):
 dataset = extractPairs("./DataFiles/FAQ.txt")
 
 
-VECTOR_DB = []
 collection = client.get_or_create_collection("faq_vector")
 
 def add_chunk(chunk):
@@ -42,7 +41,6 @@ def add_chunk(chunk):
       embeddings=[embedding],
       ids=(str(hash(chunk)))
   )
-  VECTOR_DB.append((chunk, embedding))
 
 for i, chunk in enumerate(dataset):
   add_chunk(chunk)
