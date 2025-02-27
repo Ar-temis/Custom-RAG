@@ -60,14 +60,14 @@ def read_files(path):
 
         if filename.endswith(".pdf"):
             pdf_loader = PyPDFLoader(file_path)
-            for page in pdf_loader.lazy_load():
+            for page in pdf_loader.load():
                 entry = text_splitter.split_text(page.page_content)
                 for chunk in entry:
                     add_chunk(chunk, filename, page.metadata["page"])
         
         if filename.endswith(".docx"):
             word_loader = UnstructuredWordDocumentLoader(file_path)
-            for page in word_loader.lazy_load():
+            for page in word_loader.load():
                entry = text_splitter.split_text(page.page_content)
                for chunk in entry:
                    add_chunk(chunk, filename) 
