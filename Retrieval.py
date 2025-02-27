@@ -1,6 +1,9 @@
 import ollama
 import chromadb
-from chromadb.config import Settings
+from sentence_transformers import CrossEncoder
+
+RERANK_MODEL = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', max_length=512)
+
 client = chromadb.PersistentClient(
   path="./VectorDB/"
 )
@@ -9,20 +12,17 @@ collection = client.get_collection(name="vectorDB")
 EMBEDDING_MODEL = 'hf.co/CompendiumLabs/bge-base-en-v1.5-gguf:latest'
 
 
-def retrieve(query, top_n=3):
+def retrieve(query, top_n=10):
   query_embedding = ollama.embed(model=EMBEDDING_MODEL, input=query)['embeddings'][0]
   result = collection.query(
     query_embeddings=[query_embedding],
     n_results=top_n,
     include=["documents", "metadatas"]
   )
-  
-  docs = result['documents'][0]  # List of document texts
-  metas = result['metadatas'][0]  # List of metadata dictionaries
+  pairs = []
+  passages = result["documents"][0]
+  scores = RERANK_MODEL.rank(query=query, documents=passages)
+  for score in scores:
+    pairs.append((result["documents"][0][score['corpus_id']], result["metadatas"][0][score["corpus_id"]]))
 
-  # Convert to formatted string
-  context = "\n\n".join(
-      [f"{doc}\nMetadata: {meta}" for i, (doc, meta) in enumerate(zip(docs, metas))]
-  )
-
-  return context
+  return pairs[:5]

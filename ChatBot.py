@@ -7,9 +7,13 @@ input_query = input('\nAsk me a question: ')
 while input_query != "/bye":
     retrieved_knowledge = retrieve(input_query)
 
+    # Convert to formatted string
+    context = "\n\n".join(
+        [f" - {chunk}\nMetadata: {meta}" for chunk, meta in retrieved_knowledge]
+  )
     instruction_prompt = f'''You are a helpful chatbot.
     Use only the following pieces of context to answer the question. When you are answering be reasonable and helpful.
-    When citing from a documents tell the user which documents you looked at and which pages.
+    When citing from a documents tell the user which documents you looked at and which pages at the bottom of your answer.
     Don't make up any new information:
     {retrieved_knowledge}
     '''
