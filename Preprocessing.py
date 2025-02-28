@@ -18,6 +18,7 @@ text_splitter = RecursiveCharacterTextSplitter(
         "\uff0e",  # Fullwidth full stop
         "\u3002",  # Ideographic full stop
         "",
+        "?",
     ],
     chunk_size=480,
     chunk_overlap=20,
