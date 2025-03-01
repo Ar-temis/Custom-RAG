@@ -9,6 +9,7 @@
 	],
 	"settings": {
 		"git.ignoreLimitWarning": true,
-		"liveServer.settings.multiRootWorkspaceName": "Flask-project"
+		"liveServer.settings.multiRootWorkspaceName": "Flask-project",
+		"jinja2-html-enhancer.toggleVariableCheck": true
 	}
 }

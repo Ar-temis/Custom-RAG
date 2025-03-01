@@ -2,14 +2,16 @@ import ollama
 import chromadb
 from sentence_transformers import CrossEncoder
 
-RERANK_MODEL = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', max_length=512)
 
 client = chromadb.PersistentClient(
   path="./VectorDB/"
 )
 collection = client.get_collection(name="vectorDB")
 
-EMBEDDING_MODEL = 'hf.co/CompendiumLabs/bge-base-en-v1.5-gguf:latest'
+#EMBEDDING_MODEL = 'hf.co/CompendiumLabs/bge-base-en-v1.5-gguf:latest'
+
+EMBEDDING_MODEL = 'bge-m3'
+RERANK_MODEL = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', max_length=512)
 
 
 def retrieve(query, top_n=10):

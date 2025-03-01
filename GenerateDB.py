@@ -26,7 +26,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     is_separator_regex=False
 )
 
-EMBEDDING_MODEL = 'hf.co/CompendiumLabs/bge-base-en-v1.5-gguf:latest'
+EMBEDDING_MODEL = 'bge-m3'
 
 collection = client.get_or_create_collection("vectorDB")
 
@@ -44,16 +44,21 @@ def read_files(path):
     if not os.path.exists(path):
         print(f"Error: The directory '{path}' does not exist.")
         return
-
+    
+    existing_files = []
+    with open(os.path.join(path, ".FilesAdded.txt"), "r") as file:
+        for line in file:
+            existing_files.append(line.strip())
+    log = open(os.path.join(path, ".FilesAdded.txt"), "a")
     for filename in os.listdir(path):
+        # TODO: add a logging mechanism
+        if filename == ".FilesAdded.txt" or filename in existing_files:
+            continue
         file_path = os.path.join(path, filename)
+
         print(f"Processing file: {file_path}")  
         
         if filename.endswith(".txt"):
-            pairs = []
-            currentQ = None
-            currentA = []
-
             with open(file_path, "r", encoding="utf-8") as file:
                 for chunk in text_splitter.split_text(file):
                     add_chunk(chunk, filename)
@@ -73,8 +78,9 @@ def read_files(path):
                for chunk in entry:
                    add_chunk(chunk, filename) 
 
+        log.write('\n'+filename)
         print(f"Finished loading {filename}.")
-
+    log.close()
 read_files("./DataFiles/")
 
 print(f"Finished adding all files to vector database.")
