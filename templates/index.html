@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block title %} QueryChat {% endblock title %} {%
+block body %}
+<!-- Chat header -->
+<div class="header">
+  <div class="header-info">
+    <h2 class="logo-text">QueryChat</h2>
+  </div>
+</div>
+
+<!-- chat body -->
+<div class="main">
+  <div class="upload-docs"></div>
+  <div class="chat-overall">
+    <div class="chat-body">
+      <div class="bot-message">
+        <div class="message-text">Hey There!</div>
+      </div>
+      <div class="user-message">
+        <div class="message-text">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <form action="#" class="acton-form">
+        <textarea placeholder="Message..." class="input"> </textarea>
+        <div class="chat-controls">
+          <button type="submit" class="material-symbols-rounded">
+            arrow_upward
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

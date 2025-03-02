@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    background: linear-gradient(#EEEEFF, #C8C7FF);
+}
+.header {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+}
+
+.chat-overall {
+    width: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    
+    border-radius: 15px;
+}
+
+.upload-docs {
+    width: 25%;
+}
