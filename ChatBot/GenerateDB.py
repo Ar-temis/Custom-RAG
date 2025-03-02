@@ -81,6 +81,7 @@ def read_files(path):
         log.write('\n'+filename)
         print(f"Finished loading {filename}.")
     log.close()
+
 read_files("./DataFiles/")
 
 print(f"Finished adding all files to vector database.")

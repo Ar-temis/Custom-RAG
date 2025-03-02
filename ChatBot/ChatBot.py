@@ -9,7 +9,7 @@ while input_query != "/bye":
 
     context = "\n\n".join(
         [f" - {chunk}\nMetadata: {meta}" for chunk, meta in retrieved_knowledge]
-  )
+    )
     instruction_prompt = f'''You are a helpful chatbot.
     Use only the following pieces of context to answer the question. When you are answering be reasonable and helpful.
     At the bottom of your answer include which documents you looked at and which pages.
