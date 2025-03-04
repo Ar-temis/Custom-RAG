@@ -1,4 +1,4 @@
-from chatBot import Retrieval
+from ChatBot import Retrieval
 import ollama
 
 LANGUAGE_MODEL = 'llama3.2:latest'

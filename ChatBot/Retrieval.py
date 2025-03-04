@@ -4,7 +4,7 @@ from sentence_transformers import CrossEncoder
 
 
 client = chromadb.PersistentClient(
-  path="./chatBot/VectorDB"
+  path="./ChatBot/VectorDB"
 )
 collection = client.get_collection(name="vectorDB")
 
