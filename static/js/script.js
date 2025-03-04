@@ -20,13 +20,13 @@ const generateBotResponse = async (incomingMessageDiv) => {
         headers: {
             "Content-type": 'application/json; charset=utf-8'
         },
-        body: JSON.stringify({
+        body: JSON.stringify(
             userData
-        })
+        )
     }
-    const response = await fetch('{{ url_for("index") }}', requestOptions)
-// TODO jsonify my chatbot response 
-    messageElement.innerText = response.text;
+    const response = await fetch('/', requestOptions)
+        .then(response => response.json())
+    messageElement.innerText = response.message;
     incomingMessageDiv.classList.remove("thinking");
 }
 
@@ -71,4 +71,8 @@ messageInput.addEventListener("keydown", (e) => {
     }
 });
 
-sendMessageButton.addEventListener("click", (e) => HandleOutgointMessage(e))
+sendMessageButton.addEventListener("click", (e) => {
+    if (userMessage){
+        HandleOutgointMessage(e);
+    };
+});

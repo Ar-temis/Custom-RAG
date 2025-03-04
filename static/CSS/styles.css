@@ -162,12 +162,12 @@ body {
     width: 35px;
     border: none;
     cursor: pointer;
-    color: #706db0;
+    fill: #037ffc;
     background: none;
     transition: 0.2s ease;
 }
 .chat-form .chat-controls button:hover{
-    background: #f1f1ff;
+    fill: #004891;
 }
 .upload-docs {
     border: 2px solid black;
