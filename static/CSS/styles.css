@@ -1,0 +1,181 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(#EEEEFF, #C8C7FF);
+    min-height: 100vh;
+}
+.header {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.chat-overall {
+    position:relative;
+    width: 75%;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 15px;
+    margin-right: 25px;
+}
+
+.chat-body {
+    overflow-y: auto;
+    display: flex;
+    height: 700px;
+    padding: 25px 22px;
+    margin-bottom: 80px;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.chat-body .message {
+    display: flex;
+    gap: 11px;
+    align-items: left;
+}
+.chat-body .message .message-text {
+    padding: 12px 16px;
+    max-width: 75%;
+    font-size: 0.95rem;
+}
+
+.chat-body .bot-message .bot-avatar {
+    height: 35px;
+    width: 35px;
+    padding: 5px;
+    fill:#fff;
+    flex-shrink: 0;
+    align-self: flex-end;
+    margin-bottom: 2px;
+    background: #037ffc;
+    border-radius: fixed;
+}
+
+.chat-body .user-message {
+    flex-direction: column;
+    align-items: flex-end;
+}
+.chat-body .bot-message .message-text {
+    background: #f2f2ff;
+    border-radius: 13px 13px 13px 3px;
+}
+
+.chat-body .bot-message .thinking .message-text {
+    padding: 2px 16px;
+}
+.chat-body .user-message .message-text {
+    color: #fff;
+    background: #037ffc;
+    border-radius: 13px 13px 3px 13px;
+}
+
+.chat-body .bot-message .thinking {
+    display: flex;
+    gap: 4px;
+    padding-block: 5px;
+}
+.chat-body .bot-message .thinking .dot {
+    height: 7px;
+    width: 7px;
+    opacity: 0.7;
+    border-radius: 50%;
+    background:#037ffc;
+    animation: dotPulse 1.8s ease-in-out infinite;
+}
+
+.chat-body .bot-message .thinking .dot:nth-child(1){
+    animation-delay: 0.2s;
+}
+.chat-body .bot-message .thinking .dot:nth-child(2){
+    animation-delay: 0.3s;
+}
+.chat-body .bot-message .thinking .dot:nth-child(3){
+    animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+    0%, 44% {
+        transform: translateY(0);
+    }
+    28% {
+        opacity: 0.4;
+        transform: translateY(-3px);
+    }
+    44% {
+        opacity: 0.2;
+    }
+}
+
+.chat-footer {
+    position: absolute; 
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    padding: 15px 22px 20px;
+}
+
+.chat-footer .chat-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 30px;
+    outline: 1px solid #cccce5;
+}
+
+.chat-footer .chat-form:focus-within {
+    outline: 2px solid #037ffc;
+}
+.chat-form .input {
+    border: none;
+    outline: none;
+    height: 47px;
+    width: 100%;
+    resize: none;
+    font-size: 0.95rem;
+    padding: 14px 0 13px 18px;
+    border-radius: inherit;
+}
+
+.chat-form .chat-controls {
+    display: flex;
+    height: 47px;
+    align-items: center;
+    align-self: flex-end;
+    padding-right: 6px;
+}
+.chat-form .chat-controls button{
+    height: 35px;
+    width: 35px;
+    border: none;
+    cursor: pointer;
+    fill: #037ffc;
+    background: none;
+    transition: 0.2s ease;
+}
+.chat-form .chat-controls button:hover{
+    fill: #004891;
+}
+.upload-docs {
+    border: 2px solid black;
+    margin-right: 25px;
+    margin-left: 25px;
+    padding: 10px;
+    width: 25%;
+    height: 800px;
+    border-radius: 15px;
+    background-color: #FFFFFFFF; 
+}
