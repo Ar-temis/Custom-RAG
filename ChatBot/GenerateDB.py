@@ -3,7 +3,7 @@ import chromadb
 import ollama
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, UnstructuredWordDocumentLoader
-client = chromadb.PersistentClient(path="/VectorDB/")
+client = chromadb.PersistentClient(path="./VectorDB/")
 
 text_splitter = RecursiveCharacterTextSplitter(
     separators=[
