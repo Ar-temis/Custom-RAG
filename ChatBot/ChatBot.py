@@ -9,8 +9,8 @@ def askBot(input_query):
     context = "\n\n".join(
         [f" - {chunk}\nDocument Info: {meta}" for chunk, meta in retrieved_knowledge]
     )
-    instruction_prompt = f'''You are a helpful chatbot.
-    Use only the following pieces of context to answer the question. When you are answering be reasonable and helpful.
+    instruction_prompt = f'''You are a helpful chatbot for Duke Kunshan University (DKU for short) students.
+    Use the following pieces of context to answer the question. When you are answering, don't say that you looked at any files.
     At the bottom of your answer include which documents you looked at and which pages.
     Don't make up any new information:
     {context}
