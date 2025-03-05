@@ -3,7 +3,8 @@ import ollama
 
 LANGUAGE_MODEL = 'llama3.2:latest'
 
-def askBot(input_query):
+input_query = input('\nAsk me a question: ')
+while input_query != "/bye":
     retrieved_knowledge = Retrieval.retrieve(input_query)
 
     context = "\n\n".join(
@@ -17,13 +18,19 @@ def askBot(input_query):
     {context}
     '''
 
-    response = ollama.chat(
+    stream = ollama.chat(
         model=LANGUAGE_MODEL,
         messages=[
             {'role': 'system', 'content': instruction_prompt},
             {'role': 'user', 'content': input_query},
         ],
         stream=False,
-    ) 
+    )
 
-    return response['message']['content']
+    print('Chatbot response:')
+    print(stream['message']['content'])
+    # for chunk in stream:
+    #     print(chunk['message']['content'], end='', flush=True)
+    input_query = input('\nAsk me a question: ')
+
+print("Goodbye. Have a great day :D")

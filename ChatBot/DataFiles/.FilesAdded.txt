@@ -1,6 +1,6 @@
-
-Career-Services-Brochure-EN.pdf
 DKU Advisor Manual - AY 2022-2023.pdf
-Advising FAQ.docx
-ug_bulletin.pdf
 FACULTY-HANDBOOK-_2022.pdf
+.DS_Store
+ug_bulletin.pdf
+Advising FAQ.docx
+Career-Services-Brochure-EN.pdf
