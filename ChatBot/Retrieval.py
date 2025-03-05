@@ -28,5 +28,6 @@ def retrieve(query, top_n=10):
   scores = RERANK_MODEL.rank(query=query, documents=passages)
   for score in scores:
     pairs.append((result["documents"][0][score['corpus_id']], result["metadatas"][0][score["corpus_id"]]))
-  # print([f'\n{i+1}. {pair}' for i, pair in enumerate(pairs)])
-  return pairs[:5]
+  # after = '\n\n'.join([f'\n{i+1}. {pair}' for i, pair in enumerate(pairs)])
+  # print(after)
+  return pairs[:4]

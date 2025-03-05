@@ -9,7 +9,6 @@ text_splitter = RecursiveCharacterTextSplitter(
     separators=[
         "\n\n",
         "\n",
-        " ",
         ".",
         ",",
         "\u200b",  # Zero-width space
@@ -20,7 +19,7 @@ text_splitter = RecursiveCharacterTextSplitter(
         "",
         "?",
     ],
-    chunk_size=480,
+    chunk_size=490,
     chunk_overlap=20,
     length_function=len,
     is_separator_regex=False
@@ -51,7 +50,6 @@ def read_files(path):
             existing_files.append(line.strip())
     log = open(os.path.join(path, ".FilesAdded.txt"), "a")
     for filename in os.listdir(path):
-        # TODO: add a logging mechanism
         if filename == ".FilesAdded.txt" or filename in existing_files:
             continue
         file_path = os.path.join(path, filename)
@@ -78,7 +76,7 @@ def read_files(path):
                for chunk in entry:
                    add_chunk(chunk, filename) 
 
-        log.write('\n'+filename)
+        log.write(filename + '\n')
         print(f"Finished loading {filename}.")
     log.close()
 
