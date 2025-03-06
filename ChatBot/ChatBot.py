@@ -9,7 +9,7 @@ def askBot(input_query):
     context = "\n\n".join(
         [f" - {chunk}\nDocument Info: {meta}" for chunk, meta in retrieved_knowledge]
     )
-    instruction_prompt = f'''You are a helpful chatbot for Duke Kunshan University (DKU for short) students.
+    instruction_prompt = f'''You are a helpful chatbot for Duke Kunshan University (DKU) students.
     If the answer is not provided in the context, say you don't know.
     Use the following pieces of context to answer the question. When you are answering, don't say that you looked at any files.
     At the bottom of your answer include which documents you looked at and which pages.
