@@ -2,7 +2,11 @@ import os
 import chromadb
 import ollama
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader, UnstructuredWordDocumentLoader
+from langchain_community.document_loaders import (
+    PyPDFLoader,
+    UnstructuredWordDocumentLoader,
+)
+
 client = chromadb.PersistentClient(path="./VectorDB/")
 
 text_splitter = RecursiveCharacterTextSplitter(
@@ -22,28 +26,30 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=490,
     chunk_overlap=20,
     length_function=len,
-    is_separator_regex=False
+    is_separator_regex=False,
 )
 
-EMBEDDING_MODEL = 'bge-m3'
+EMBEDDING_MODEL = "bge-m3"
 
 collection = client.get_or_create_collection("vectorDB")
 
-def add_chunk(chunk, filename, page = 0):
-  embedding = ollama.embed(model=EMBEDDING_MODEL, input=chunk)['embeddings'][0]
-  collection.add(
-      documents=[chunk],
-      embeddings=[embedding],
-      ids=(str(hash(chunk))),
-      metadatas=[{"filename": filename, "page": page}]
-  )
+
+def add_chunk(chunk, filename, page=0):
+    embedding = ollama.embed(model=EMBEDDING_MODEL, input=chunk)["embeddings"][0]
+    collection.add(
+        documents=[chunk],
+        embeddings=[embedding],
+        ids=(str(hash(chunk))),
+        metadatas=[{"filename": filename, "page": page}],
+    )
+
 
 def read_files(path):
     print(f"Reading from directory: {os.path.abspath(path)}")  # Debugging output
     if not os.path.exists(path):
         print(f"Error: The directory '{path}' does not exist.")
         return
-    
+
     existing_files = []
     with open(os.path.join(path, ".FilesAdded.txt"), "r") as file:
         for line in file:
@@ -54,13 +60,12 @@ def read_files(path):
             continue
         file_path = os.path.join(path, filename)
 
-        print(f"Processing file: {file_path}")  
-        
+        print(f"Processing file: {file_path}")
+
         if filename.endswith(".txt"):
             with open(file_path, "r", encoding="utf-8") as file:
                 for chunk in text_splitter.split_text(file):
                     add_chunk(chunk, filename)
-
 
         if filename.endswith(".pdf"):
             pdf_loader = PyPDFLoader(file_path)
@@ -68,18 +73,19 @@ def read_files(path):
                 entry = text_splitter.split_text(page.page_content)
                 for chunk in entry:
                     add_chunk(chunk, filename, page.metadata["page"])
-        
+
         if filename.endswith(".docx"):
             word_loader = UnstructuredWordDocumentLoader(file_path)
             for page in word_loader.load():
-               entry = text_splitter.split_text(page.page_content)
-               for chunk in entry:
-                   add_chunk(chunk, filename) 
+                entry = text_splitter.split_text(page.page_content)
+                for chunk in entry:
+                    add_chunk(chunk, filename)
 
-        log.write(filename + '\n')
+        log.write(filename + "\n")
         print(f"Finished loading {filename}.")
     log.close()
 
+
 read_files("./DataFiles/")
 
-print(f"Finished adding all files to vector database.")
+print("Finished adding all files to vector database.")
