@@ -19,7 +19,7 @@ while input_query != "/bye":
         f"{context}"
     )
 
-    print(instruction_prompt, "\n", input_query)
+    # print(instruction_prompt, "\n", input_query)
     stream = ollama.chat(
         model=LANGUAGE_MODEL,
         messages=[
@@ -29,6 +29,7 @@ while input_query != "/bye":
         stream=True,
     )
 
+    print("\n\n----------------------------\n\n")
     print("Chatbot response:")
     # print(stream['message']['content'])
     for chunk in stream:

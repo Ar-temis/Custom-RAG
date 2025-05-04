@@ -1,5 +1,4 @@
 .DS_Store
-VectorDB
 __pycache__
 .venv
 Dockerfile
